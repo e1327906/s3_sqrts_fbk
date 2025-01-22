@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fbk-api-deployment
+  labels:
+    app: fbk-api-app
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fbk-api-app
+
+  template:
+    metadata:
+      labels:
+        app: fbk-api-app
+    spec:
+      containers:
+        - name: fbk-api-app
+          #this docker image url set after main.yml file processing completed.
+          image: DOCKER_IMAGE
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: AWS_DYNAMODB_ENDPOINT
+              value: "https://dynamodb.ap-southeast-1.amazonaws.com"
+            - name: AWS_ACCESS_KEY
+              value: "AKIAW3MEBP5Q2ITJZQMS"
+            - name: AWS_ACCESS_SECRET_KEY
+              value: "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"
+          resources:
+            requests:
+              cpu: "200m"  # Initial CPU request
+              memory: "300Mi"  # Initial memory request
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
