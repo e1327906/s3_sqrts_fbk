@@ -27,9 +27,9 @@ spec:
             - name: AWS_DYNAMODB_ENDPOINT
               value: "https://dynamodb.ap-southeast-1.amazonaws.com"
             - name: AWS_ACCESS_KEY
-              value: "AKIAW3MEBP5Q2ITJZQMS"
+              value: AWS_ACCESS_KEY_ID
             - name: AWS_ACCESS_SECRET_KEY
-              value: "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"
+              value: AWS_SECRET_ACCESS_KEY
           resources:
             requests:
               cpu: "200m"  # Initial CPU request
